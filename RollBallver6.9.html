@@ -134,7 +134,7 @@
 			textureObstacle.image.onload = function(){
 				loadedTexture(textureObstacle);
 			}
-			textureObstacle.image.src = "libs/Cube.jpg";
+			textureObstacle.image.src = "libs/rrr.jpg";
 
 			textureGround = gl.createTexture();
 			textureGround.image = new Image();
@@ -209,10 +209,10 @@
 			GroundNormalBuffer.numItems = 4;
 
 	        var textureCoods = new Float32Array([
-      			0.0, 0.0,
-          		1.0, 0.0,
+      			0.0, 1.0,
           		1.0, 1.0,
-          		0.0, 1.0
+          		1.0, 0.0,
+          		0.0, 0.0
 	        ]);
 	        GroundTextureBuffer = gl.createBuffer();
 	        gl.bindBuffer(gl.ARRAY_BUFFER, GroundTextureBuffer);
@@ -586,6 +586,8 @@
 		var currentlyPressedKeys = [];
 		var distCamtoBall = 2;
 		var distCamtoGround = 1.5;
+		var speed = 0.02;
+
 		function handleKeyDown(event)
 		{
 			currentlyPressedKeys[event.keyCode] = true;
@@ -634,15 +636,15 @@
 		{
 		//Right and Up
 			if (currentlyPressedKeys[39] && currentlyPressedKeys[38]) {
-				if (isB(Ball.x + 0.02)) {
-					Ball.x += 0.02; 
+				if (isB(Ball.x + speed)) {
+					Ball.x += speed; 
 					isObstacle(Ball.x, Ball.y);
 				}
-				if (isB(Ball.y + 0.02)) {
-					Ball.y += 0.02; 
+				if (isB(Ball.y + speed)) {
+					Ball.y += speed; 
 					isObstacle(Ball.x, Ball.y);
 				}
-				angBall += 5; 
+				angBall += 5*(speed/0.02); 
 				Rx = -1; 
 				Ry = 1;
 				atX = Ball.x;
@@ -653,15 +655,15 @@
 			} else
 		//Right and Down
 			if (currentlyPressedKeys[39] && currentlyPressedKeys[40]) {
-				if (isB(Ball.x + 0.02)) {
-					Ball.x += 0.02; 
+				if (isB(Ball.x + speed)) {
+					Ball.x += speed; 
 					isObstacle(Ball.x, Ball.y);
 				}
-				if (isB(Ball.y - 0.02)) {
-					Ball.y -= 0.02; 
+				if (isB(Ball.y - speed)) {
+					Ball.y -= speed; 
 					isObstacle(Ball.x, Ball.y);
 				}
-				angBall -= 5; 
+				angBall -= 5*(speed/0.02); 
 				Rx = -1; 
 				Ry = -1;
 				atX = Ball.x;
@@ -672,16 +674,16 @@
 			} else
 		//Left and Up
 			if (currentlyPressedKeys[37] && currentlyPressedKeys[38]) {
-				if (isB(Ball.x - 0.02)) {
-					Ball.x -= 0.02; 
+				if (isB(Ball.x - speed)) {
+					Ball.x -= speed; 
 					isObstacle(Ball.x, Ball.y);
 				}
 
-				if (isB(Ball.y + 0.02)) {
-					Ball.y += 0.02; 
+				if (isB(Ball.y + speed)) {
+					Ball.y += speed; 
 					isObstacle(Ball.x, Ball.y);
 				}
-				angBall += 5; 
+				angBall += 5*(speed/0.02); 
 				Rx = -1; 
 				Ry = -1;
 				atX = Ball.x;
@@ -692,15 +694,15 @@
 			} else
 		//Left and Down
 			if (currentlyPressedKeys[37] && currentlyPressedKeys[40]) {
-				if (isB(Ball.x - 0.02)) {
-					Ball.x -= 0.02; 
+				if (isB(Ball.x - speed)) {
+					Ball.x -= speed; 
 					isObstacle(Ball.x, Ball.y);
 				}
-				if (isB(Ball.y - 0.02)) {
-					Ball.y -= 0.02; 
+				if (isB(Ball.y - speed)) {
+					Ball.y -= speed; 
 					isObstacle(Ball.x, Ball.y);
 				}
-				angBall -= 5; 
+				angBall -= 5*(speed/0.02); 
 				Rx = -1; 
 				Ry = 1;
 				atX = Ball.x;
@@ -711,11 +713,11 @@
 			} else
 		//Right
 		    if(currentlyPressedKeys[39]) {
-				if (isB(Ball.x + 0.02)) {
-					Ball.x += 0.02; 
+				if (isB(Ball.x + speed)) {
+					Ball.x += speed; 
 					isObstacle(Ball.x, Ball.y);
 				}
-				angBall += 5; 
+				angBall += 5*(speed/0.02); 
 				Rx = 0; 
 				Ry = 1;
 				atX = Ball.x;
@@ -726,11 +728,11 @@
 		    } else
 		//Left
 		    if(currentlyPressedKeys[37]) {
-				if (isB(Ball.x - 0.02)) {
-					Ball.x -= 0.02; 
+				if (isB(Ball.x - speed)) {
+					Ball.x -= speed; 
 					isObstacle(Ball.x, Ball.y);
 				}
-				angBall -= 5; 
+				angBall -= 5*(speed/0.02); 
 				Rx = 0; 
 				Ry = 1; 
 				atX = Ball.x;
@@ -741,11 +743,11 @@
 		    } else
 		//Up
 		    if(currentlyPressedKeys[38]) {
-				if (isB(Ball.y + 0.02)) {
-					Ball.y += 0.02; 
+				if (isB(Ball.y + speed)) {
+					Ball.y += speed; 
 					isObstacle(Ball.x, Ball.y);
 				}
-				angBall -= 5; 
+				angBall -= 5*(speed/0.02); 
 				Ry = 0;
 				Rx = 1; 
 				atX = Ball.x;
@@ -756,11 +758,11 @@
 		    } else
 		//Down
 		    if(currentlyPressedKeys[40]) {
-				if (isB(Ball.y - 0.02)) {
-					Ball.y -= 0.02; 
+				if (isB(Ball.y - speed)) {
+					Ball.y -= speed; 
 					isObstacle(Ball.x, Ball.y);
 				}
-				angBall += 5; 
+				angBall += 5*(speed/0.02); 
 				Ry = 0;
 				Rx = 1; 
 				atX = Ball.x;
