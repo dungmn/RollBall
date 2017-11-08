@@ -71,7 +71,7 @@ class BotAnswer:
 	def replymessage(self, author, inputmsg):
 		if not USE_SIM and not USE_EVE and not USE_HUMAN:
 			if author not in self.author and author != self.me:
-				self.author += [author]
+				#self.author += [author]
 				return DEFAULT_MSG
 			else:
 				return None
